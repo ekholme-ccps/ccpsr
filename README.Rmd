@@ -11,3 +11,4 @@ output: github_document
 ### Data Ingest
 
 - `set_con`: connect to CCPS Research and Eval databases
+- `fetch_fm_ids`: fetch ids of students in fall membership for a given year
