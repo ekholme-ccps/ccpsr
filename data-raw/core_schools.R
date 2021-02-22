@@ -17,4 +17,4 @@ core_school_codes <- pull(core_school_codes) %>%
   as.numeric()
 
 #writing out
-save(core_school_codes, file = here::here("data/core_codes.RData"))
+save(core_school_codes, file = here::here("data/core_school_codes.RData"))

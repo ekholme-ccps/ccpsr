@@ -1,6 +1,7 @@
 
 #' Recode Ethnicity
 #'
+#'
 #' @param df data
 #' @param eth_var ethnicity variable. Assumed to be "ethnic" as a result of db query and clean_names
 #' @param hisp_var hispanic/latino variable. Assumed to be "hispanic_latino" as a result of db query and clean_names
