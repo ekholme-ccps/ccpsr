@@ -11,8 +11,23 @@
 #' @return
 #' @export
 #'
-#' @examples
-clean_demos <- function(df, speced = indicator_speced, ell = ell_status, gate = ccps_gate) {
+#' @examples \dontrun{
+#' library(tidyverse)
+#' library(janitor)
+#' library(ccpsr)
+#'
+#' con <- set_con()
+#'
+#' ex <- odbc::dbGetQuery(con, 'SELECT *
+#' FROM [CCPS_Shared].[CCPS_Shared].[RE_Students]
+#' WHERE School_Year = 2019')
+#'
+#' ex %>%
+#' clean_names() %>%
+#' recode_demos()
+#'
+#' }
+recode_demos <- function(df, speced = indicator_speced, ell = ell_status, gate = ccps_gate) {
 
   df %>%
     dplyr::mutate({{ speced }} := dplyr::if_else({{ speced }} == "N", "Not_SPED", "SPED"),
