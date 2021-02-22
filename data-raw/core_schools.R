@@ -13,7 +13,7 @@ core_school_codes <- odbc::dbGetQuery(con, paste0(
   '
 ))
 
-core_school_codes <- pull(core_school_codes) %>%
+core_school_codes <- dplyr::pull(core_school_codes) %>%
   as.numeric()
 
 #writing out

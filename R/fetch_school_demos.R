@@ -1,4 +1,14 @@
 
+#' Fetch School Demographics
+#'
+#' This will get the sex, ethnicity, sped, ell, and gifted %s by school for a given year
+#'
+#' @param year year to get demographics for
+#'
+#' @return
+#' @export
+#'
+#' @examples
 fetch_school_demos <- function(year) {
 
   con <- ccpsr::set_con()
@@ -35,7 +45,8 @@ fetch_school_demos <- function(year) {
     dplyr::filter(Student_id %in% tmp) %>%
     tibble::as_tibble() %>%
     janitor::clean_names() %>%
-    ccpsr::recode_ethnicity()
+    ccpsr::recode_ethnicity() %>%
+    ccpsr::recode_demos()
 
   orgs <- odbc::dbGetQuery(con, '
     SELECT ORGANIZATION_NAME as sch_name,
@@ -47,6 +58,20 @@ fetch_school_demos <- function(year) {
   joined <- st_demos %>%
     dplyr::left_join(orgs, by = c("state_school" = "state_school_code"))
 
-return(joined)
+  #demographics to get
+  demo_vec <- c("sex", "ethnic", "indicator_speced", "ell_status", "ccps_gate")
+
+  ret <- map(demo_vec,
+             ~get_single_demo(df = joined, demovar = .x, sch_name, state_school)) %>%
+    bind_rows() %>%
+    pivot_wider(
+      names_from = key,
+      values_from = perc,
+      names_prefix = "sch_perc_"
+    ) %>%
+    clean_names() %>%
+    mutate(across(where(is.numeric), ~replace_na(., 0)))
+
+return(ret)
 
 }

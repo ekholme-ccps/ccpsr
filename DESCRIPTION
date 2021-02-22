@@ -18,6 +18,8 @@ Imports:
     purrr,
     dplyr,
     magrittr,
-    rlang
+    rlang,
+    janitor,
+    tibble
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1

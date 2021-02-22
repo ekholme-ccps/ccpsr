@@ -7,6 +7,7 @@
 #' @param speced special education indicator. Presumed to be indicator_speced.
 #' @param ell ell indicator. Presumed to be ell_status.
 #' @param gate gifted indicator. Presumed to be ccps_gate.
+#' @param sex sex indicator. Presumed to be sex.
 #'
 #' @return
 #' @export
@@ -27,11 +28,13 @@
 #' recode_demos()
 #'
 #' }
-recode_demos <- function(df, speced = indicator_speced, ell = ell_status, gate = ccps_gate) {
+recode_demos <- function(df, speced = indicator_speced, ell = ell_status, gate = ccps_gate,
+                         sex = sex) {
 
   df %>%
     dplyr::mutate({{ speced }} := dplyr::if_else({{ speced }} == "N", "Not_SPED", "SPED"),
            {{ ell }} := dplyr::if_else({{ ell }} == "N", "Not_ELL", "ELL"),
-           {{ gate }} := dplyr::if_else({{ gate }} == "Y", "Gifted", "Not_Gifted"))
+           {{ gate }} := dplyr::if_else({{ gate }} == "Y", "Gifted", "Not_Gifted"),
+           {{ sex }} := dplyr::if_else({{sex }} == "M", "Male", "Female"))
 
 }
