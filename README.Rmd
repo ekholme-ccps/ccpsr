@@ -18,3 +18,8 @@ output: github_document
 
 - `recode_ethnicity`: recode ethnicity to more interpretable values
 - `recode_demos`: recode ethnicities into more transparent values
+
+### Data
+
+- `core_school_codes`: school codes for elementary, middle, and high schools
+- `secondary_school_codes`: school codes for middle, high, alternative, and regional programs
