@@ -37,3 +37,5 @@ You can install `{ccprs}` from Github by running the following command:
 #install.packages("remotes") if you do not have {remotes} installed already
 remotes::install_github("ekholme-ccps/ccpsr")
 ```
+
+**adding a test note to make sure I can commit/push**
